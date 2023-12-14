@@ -43,6 +43,7 @@ const reflectionFinder = (arr, sum) => {
     }
 }
 
+
 reflectionFinder(patterns, horizontalSum)
 console.log(horizontalSum, 'horizontal')
 
@@ -76,3 +77,44 @@ const partOne = () => {
 }
 
 console.log(partOne(), 'part one')
+
+const horizontalSum2 = []
+const verticalSum2 = []
+
+const reflectionFinder2 = (arr, sum) => {
+    for (let i = 0; i < arr.length; i++) {
+        let left = []
+        let right = []
+        for (let j = 0; j < arr[i].length - 1; j++) {
+            left = arr[i].slice(0, j + 1).reverse()
+            right = arr[i].slice(j + 1)
+            left = left.slice(0, right.length)
+            right = right.slice(0, left.length)
+            let counter = 0
+            for (let k = 0; k < left.length; k++) {
+                for (let l = 0; l < left[0].length; l++) {
+                    if (left[k][l] !== right[k][l]) counter++
+                }
+            }
+            if (counter === 1) {
+                sum.push(j + 1)
+                break
+            }
+        }
+    }
+}
+
+reflectionFinder2(patterns, horizontalSum2)
+console.log(horizontalSum2, ' horizontal2')
+
+reflectionFinder2(transposedPatterns, verticalSum2)
+console.log(verticalSum2, 'vertical2')
+
+const partTwo = () => {
+    const a = horizontalSum2.length > 0 ? horizontalSum2.reduce((a, b) => a + b) * 100 : 0
+    const b = verticalSum2.length > 0 ? verticalSum2.reduce((a, b) => a + b) : 0
+
+    return a + b
+}
+
+console.log(partTwo(), 'part two')
