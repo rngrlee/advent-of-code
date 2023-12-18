@@ -20,7 +20,6 @@ const vertices = new Set()
 const traverse = (arr, seen, vertices) => {
     let r = 0
     let c = 0
-    let v = 0
     for (let i = 0; i < arr.length; i++) {
         const [dr, dc] = dir[arr[i][0]]
         r += (dr * Number(arr[i][1]))
